@@ -19,9 +19,13 @@ import { Redirect, Route, Router } from "react-router";
 import List from "./List";
 import Settings from "./Settings";
 import { logOutOutline, newspaper, settings } from "ionicons/icons";
+import "./Menu.css";
 
 const Menu: React.FC = () => {
-  const paths = [{ name: "Notas", url: "/app/list", icon: newspaper }];
+  const paths = [
+    { name: "Notas", url: "/app/list", icon: newspaper },
+    { name: "Configuración", url: "/app/settings", icon: settings },
+  ];
   const router = useIonRouter();
   return (
     <IonPage>
@@ -32,29 +36,17 @@ const Menu: React.FC = () => {
               <IonTitle>Dear Diary</IonTitle>
             </IonToolbar>
           </IonHeader>
-          <IonContent>
-            {paths.map((item, index) => (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem
-                  detail={true}
-                  routerLink={item.url}
-                  routerDirection="none"
-                >
-                  <IonIcon slot="start" icon={item.icon} />
-                  {item.name}
-                </IonItem>
-              </IonMenuToggle>
-            ))}
-
-            <IonMenuToggle autoHide={false}>
-              <button
-                className="submit-btn"
-                onClick={() => router.push("/", "root")}
-              >
-                Salir
-              </button>
-            </IonMenuToggle>
+          <IonContent class="side">
+            <button
+              className="submit-btn"
+              onClick={() => router.push("/app/list")}
+            >
+              Mis notas
+            </button>
           </IonContent>
+          <button className="btn-exit" onClick={() => router.push("/", "root")}>
+            Salir
+          </button>
         </IonMenu>
 
         <IonRouterOutlet id="main">

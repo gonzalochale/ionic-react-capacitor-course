@@ -1,14 +1,54 @@
-ion-item:hover {
-  --background: #5cffa8;
-  --color: var(--ion-color-dark);
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
-ion-item {
-  --padding-start: 20px;
+.input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-ion-item::part(detail-icon) {
-  color: #ff00ff;
-  opacity: 1;
+.btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d7d1d1;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.btn-exit {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: red;
+  opacity: 0.8;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 

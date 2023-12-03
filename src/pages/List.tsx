@@ -24,8 +24,9 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { addOutline } from "ionicons/icons";
+import "./List.css";
 
-const List = () => {
+const List: React.FC = () => {
   const [showAddNoteModal, setShowAddNoteModal] = useState(false);
   const [newNoteTitle, setNewNoteTitle] = useState("");
   const [newNoteContent, setNewNoteContent] = useState("");
@@ -72,7 +73,6 @@ const List = () => {
     }
   };
 
-  // Agrupa las notas por mes
   const groupedNotes: { [key: string]: any[] } = {};
   notes.forEach((note) => {
     const month = note.date.split("-")[1];
@@ -89,15 +89,13 @@ const List = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>My Notes</IonTitle>
+          <IonTitle>Mis notas</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonRefresher slot="fixed" onIonRefresh={(ev) => ev.detail.complete()}>
           <IonRefresherContent />
         </IonRefresher>
-
-        {/* Itera sobre los grupos de notas y muestra las notas agrupadas por mes */}
         {Object.entries(groupedNotes).map(([month, monthNotes]) => (
           <div key={month}>
             <h2>{getMonthName(month)}</h2>
@@ -120,7 +118,11 @@ const List = () => {
           </div>
         ))}
 
-        <IonModal isOpen={showAddNoteModal} onDidDismiss={closeAddNoteModal}>
+        <IonModal
+          isOpen={showAddNoteModal}
+          onDidDismiss={closeAddNoteModal}
+          class="container"
+        >
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="end">
@@ -129,23 +131,24 @@ const List = () => {
               <IonTitle>Nueva Nota</IonTitle>
             </IonToolbar>
           </IonHeader>
-          <IonContent>
-            <IonItem>
+          <IonContent class="modal">
+            <div className="input">
               <IonLabel position="floating">Título:</IonLabel>
               <IonInput
                 type="text"
                 value={newNoteTitle}
                 onIonChange={(e) => setNewNoteTitle(e.detail.value!)}
               />
-            </IonItem>
-            <IonItem>
+            </div>
+
+            <div className="input">
               <IonLabel position="floating">Contenido:</IonLabel>
               <IonTextarea
                 value={newNoteContent}
                 onIonChange={(e) => setNewNoteContent(e.detail.value!)}
               />
-            </IonItem>
-            <IonItem>
+            </div>
+            <div className="input">
               <IonLabel position="stacked">Fecha:</IonLabel>
               <IonDatetime
                 display-format="YYYY-MM-DDTHH:mm:ss"
@@ -158,13 +161,15 @@ const List = () => {
                   });
                 }}
               ></IonDatetime>
-            </IonItem>
-            <IonButton expand="full" onClick={addNote}>
+            </div>
+
+            <button onClick={addNote} className="btn">
               Agregar
-            </IonButton>
-            <IonButton expand="full" onClick={closeAddNoteModal}>
+            </button>
+
+            <button onClick={closeAddNoteModal} className="btn-exit">
               Cancelar
-            </IonButton>
+            </button>
           </IonContent>
         </IonModal>
 
